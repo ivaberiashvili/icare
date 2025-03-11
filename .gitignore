@@ -1,0 +1,19 @@
+# Virtual environment
+venv/
+
+# Bytecode files
+__pycache__/
+*.py[cod]
+
+# Django-related files
+*.log
+db.sqlite3
+media/
+staticfiles/
+.env
+
+# IDE & OS-specific files
+.vscode/
+.idea/
+.DS_Store
+*.swp
