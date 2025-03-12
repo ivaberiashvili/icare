@@ -2,19 +2,24 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
 from .models import Post
+from django.views import View
 
 
 # Create your views here.
-def home_view(request):
-    return HttpResponse("Hello, Django Bootcamp!")
+class HomeView(View):
+    def get(self, request):
+        return HttpResponse("Hello, Django Bootcamp!")
 
-def api_view(request):
-    data = {
-        "message": "Welcome to Django Bootcamp API!",
-        "status": "success"
-    }
-    return JsonResponse(data)
+class APIView(View):
+    def get(self, request):
+        data = {
+            "message": "Welcome to Django Bootcamp API!",
+            "status": "success"
+        }
+        return JsonResponse(data)
 
-def post_list_view(request):
-    posts = Post.objects.all()
-    return render(request, 'core/post_list.html', {'posts': posts})
+
+class PostListView(View):
+    def get(self, request):
+        posts = Post.objects.all()
+        return render(request, 'core/post_list.html', {'posts': posts})
