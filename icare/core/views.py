@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
+from .models import Post
 
 
 # Create your views here.
@@ -13,3 +14,7 @@ def api_view(request):
         "status": "success"
     }
     return JsonResponse(data)
+
+def post_list_view(request):
+    posts = Post.objects.all()
+    return render(request, 'core/post_list.html', {'posts': posts})
