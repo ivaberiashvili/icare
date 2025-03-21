@@ -7,6 +7,10 @@ from django.views import View
 from django.shortcuts import render
 from .utils import get_price_ranked_products
 
+from rest_framework import generics
+from .models import Product
+from .serializers import ProductSerializer
+
 
 # Create your views here.
 class HomeView(View):
@@ -27,8 +31,17 @@ class PostListView(View):
         posts = Post.objects.all()
         return render(request, 'core/post_list.html', {'posts': posts})
     
-    
+
 class RankedProductsView(View):
     def get(self, request):
         ranked_products = get_price_ranked_products()
         return render(request, 'core/ranked_products.html', {'ranked': ranked_products})
+    
+
+class ProductListCreate(generics.ListCreateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+class ProductRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer

@@ -15,9 +15,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from core.views import HomeView, APIView, PostListView
 from core.views import RankedProductsView
+from core.views import ProductListCreate, ProductRetrieveUpdateDestroy
 
 
 urlpatterns = [
@@ -26,4 +27,7 @@ urlpatterns = [
     path('api/', APIView.as_view()),
     path('blog/', PostListView.as_view()),
     path('ranked-products/', RankedProductsView.as_view(), name='ranked-products'),
+    path('api-auth/', include('rest_framework.urls')),
+    path('products/', ProductListCreate.as_view(), name='product-list'),
+    path('products/<int:pk>/', ProductRetrieveUpdateDestroy.as_view(), name='product-detail'),
 ]
