@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from core.views import HomeView, APIView, PostListView
+from core.views import RankedProductsView
 
 
 urlpatterns = [
@@ -24,4 +25,5 @@ urlpatterns = [
     path('', HomeView.as_view()),
     path('api/', APIView.as_view()),
     path('blog/', PostListView.as_view()),
+    path('ranked-products/', RankedProductsView.as_view(), name='ranked-products'),
 ]

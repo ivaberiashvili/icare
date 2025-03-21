@@ -4,6 +4,9 @@ from django.http import JsonResponse
 from .models import Post
 from django.views import View
 
+from django.shortcuts import render
+from .utils import get_price_ranked_products
+
 
 # Create your views here.
 class HomeView(View):
@@ -23,3 +26,9 @@ class PostListView(View):
     def get(self, request):
         posts = Post.objects.all()
         return render(request, 'core/post_list.html', {'posts': posts})
+    
+    
+class RankedProductsView(View):
+    def get(self, request):
+        ranked_products = get_price_ranked_products()
+        return render(request, 'core/ranked_products.html', {'ranked': ranked_products})

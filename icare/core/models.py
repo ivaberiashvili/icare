@@ -18,11 +18,11 @@ class Comment(models.Model):
     def __str__(self):
         return f"Comment on {self.post.title}"
 
-class Category (models.Model):
+class Category(models.Model):
     name = models.CharField(max_length=100)
 
     class Meta:
-        ordering = ['name']  # Orders categories alphabetically
+        verbose_name_plural = "Categories"  # Fix plural name in Django Admin
 
     def __str__(self):
         return self.name
