@@ -1,17 +1,18 @@
 from django.contrib import admin
 from django.urls import path, include
-from core.views import HomeView, APIView, PostListView
+from core.views import HomeView, WelcomeAPIView, PostListView
 from core.views import RankedProductsView, ProductListCreate, ProductRetrieveUpdateDestroy
 from rest_framework import permissions
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 # JWT
 from rest_framework_simplejwt.views import TokenObtainPairView,TokenRefreshView
+from core.views import ManagerOnlyView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomeView.as_view()),
-    path('api/', APIView.as_view()),
+    path('api/', WelcomeAPIView.as_view()),
     path('blog/', PostListView.as_view()),
     path('ranked-products/', RankedProductsView.as_view(), name='ranked-products'),
     path('api-auth/', include('rest_framework.urls')),
@@ -28,4 +29,6 @@ urlpatterns = [
     # JWT
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('manager-only/', ManagerOnlyView.as_view(), name='manager-only'),
+
 ]

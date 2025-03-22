@@ -12,15 +12,19 @@ from .models import Product
 from .serializers import ProductSerializer
 
 from rest_framework.permissions import IsAuthenticated
+from rest_framework import generics
+from .permissions import IsAdminOrReadOnly
 
-
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .permissions import IsManager
 
 # Create your views here.
 class HomeView(View):
     def get(self, request):
         return HttpResponse("Hello, Django Bootcamp!")
 
-class APIView(View):
+class WelcomeAPIView(View):
     def get(self, request):
         data = {
             "message": "Welcome to Django Bootcamp API!",
@@ -44,9 +48,19 @@ class RankedProductsView(View):
 class ProductListCreate(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAdminOrReadOnly]
+
+
 
 class ProductRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAdminOrReadOnly]
+
+
+
+class ManagerOnlyView(APIView):
+    permission_classes = [IsAuthenticated, IsManager]
+
+    def get(self, request):
+        return Response({"message": "Hello Manager!"})
