@@ -17,3 +17,6 @@ staticfiles/
 .idea/
 .DS_Store
 *.swp
+
+# Secrets
+.env
