@@ -27,7 +27,7 @@ class HomeView(View):
 class WelcomeAPIView(View):
     def get(self, request):
         data = {
-            "message": "Welcome to Django Bootcamp API!",
+            "message": "Message from develop branch again",
             "status": "success"
         }
         return JsonResponse(data)
