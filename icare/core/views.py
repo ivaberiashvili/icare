@@ -27,7 +27,7 @@ class HomeView(View):
 class WelcomeAPIView(View):
     def get(self, request):
         data = {
-            "message": "Message from feature branch",
+            "message": "Message from develop branch again",
             "status": "success"
         }
         return JsonResponse(data)
