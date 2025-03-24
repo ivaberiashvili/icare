@@ -19,6 +19,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .permissions import IsManager
 
+from django.http import JsonResponse
+from .tasks import send_welcome_email
+
 # Create your views here.
 class HomeView(View):
     def get(self, request):
@@ -64,3 +67,9 @@ class ManagerOnlyView(APIView):
 
     def get(self, request):
         return Response({"message": "Hello Manager!"})
+    
+
+class TestWelcomeEmailView(View):
+    def get(self, request, *args, **kwargs):
+        send_welcome_email.delay(user_id=42)
+        return JsonResponse({"status": "Task sent!"})
