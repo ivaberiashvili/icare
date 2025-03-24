@@ -20,3 +20,10 @@ staticfiles/
 
 # Secrets
 .env
+
+# Celery Beat schedule DB
+celerybeat-schedule
+celerybeat-schedule.db
+
+# Redis DB snapshot
+dump.rdb
