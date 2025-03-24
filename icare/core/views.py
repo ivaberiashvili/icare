@@ -22,6 +22,8 @@ from .permissions import IsManager
 from django.http import JsonResponse
 from .tasks import send_welcome_email
 
+from .tasks import risky_task
+
 # Create your views here.
 class HomeView(View):
     def get(self, request):
@@ -73,3 +75,8 @@ class TestWelcomeEmailView(View):
     def get(self, request, *args, **kwargs):
         send_welcome_email.delay(user_id=42)
         return JsonResponse({"status": "Task sent!"})
+
+class TriggerRiskyTaskView(View):
+    def get(self, request, *args, **kwargs):
+        risky_task.delay()
+        return JsonResponse({"status": "Risky task sent!"})    

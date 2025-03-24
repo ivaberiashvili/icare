@@ -7,7 +7,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, Sp
 # JWT
 from rest_framework_simplejwt.views import TokenObtainPairView,TokenRefreshView
 from core.views import ManagerOnlyView
-from core.views import TestWelcomeEmailView
+from core.views import TestWelcomeEmailView, TriggerRiskyTaskView
 
 
 urlpatterns = [
@@ -35,5 +35,7 @@ urlpatterns = [
 
     path("test-email/", TestWelcomeEmailView.as_view()),
 
+
+    path("test-risky/", TriggerRiskyTaskView.as_view()),
 
 ]
